@@ -95,6 +95,15 @@ public class MyPlacesList extends AppCompatActivity {
             i.putExtras(positionBundle);
             startActivityForResult(i, 1);
         }
+        else if(item.getItemId() == 3){
+            MyPlacesData.getInstance().deletePlace(info.position);
+            setList();
+        }
         return super.onContextItemSelected(item);
+    }
+
+    private void setList(){
+        ListView myPlacesList = (ListView)findViewById(R.id.my_places_list);
+        myPlacesList.setAdapter(new ArrayAdapter<MyPlace>(this, android.R.layout.simple_list_item_1, MyPlacesData.getInstance().getMyPlaces()));
     }
 }
