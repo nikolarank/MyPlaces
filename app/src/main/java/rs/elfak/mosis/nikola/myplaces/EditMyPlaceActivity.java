@@ -81,14 +81,15 @@ public class EditMyPlaceActivity extends ActionBarActivity implements View.OnCli
                 EditText etDesc = (EditText) findViewById(R.id.editmyplace_desc_edit);
                 String desc = etDesc.getText().toString();
                 EditText latEdit = (EditText) findViewById(R.id.editmyplace_lat_edit);
-                String lat = etName.getText().toString();
+                String lat = latEdit.getText().toString();
                 EditText lonEdit = (EditText) findViewById(R.id.editmyplace_lon_edit);
-                String lon = etDesc.getText().toString();
+                String lon = lonEdit.getText().toString();
                 if(!editMode){
                     MyPlace place = new MyPlace(nme, desc);
                     place.setLatitude(lat);
                     place.setLongitude(lon);
-                    MyPlacesData.getInstance().addNewPlace(place);
+                    MyPlacesData ins = MyPlacesData.getInstance();
+                    ins.addNewPlace(place);
                 }
                 else{
                     MyPlace place = MyPlacesData.getInstance().getPlace(position);

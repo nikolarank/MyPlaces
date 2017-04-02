@@ -10,12 +10,13 @@ public class MyPlacesData {
     ArrayList<MyPlace> myPlaces;
     MyPlacesDBAdapter dbAdapter;
 
-    public MyPlacesData() {
-        myPlaces = new ArrayList<MyPlace>();
+    private MyPlacesData() {
+
         dbAdapter = new MyPlacesDBAdapter(MyPlacesApplication.getContext());
         dbAdapter.open();
         this.myPlaces = dbAdapter.getAllEntries();
         dbAdapter.close();
+        myPlaces = new ArrayList<MyPlace>();
     }
 
     private static class SingletonHolder{
