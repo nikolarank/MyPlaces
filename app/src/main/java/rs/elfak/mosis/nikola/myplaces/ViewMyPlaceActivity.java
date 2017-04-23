@@ -59,7 +59,9 @@ public class ViewMyPlaceActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         if(id == R.id.show_map_item){
-            Toast.makeText(this, "Show Map!", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent (this, MyPlacesMapActivity.class);
+            i.putExtra("state",MyPlacesMapActivity.SHOW_MAP);
+            startActivity(i);
         }
         else if(id == R.id.my_places_list_item){
             Intent i = new Intent(this, MyPlacesList.class);

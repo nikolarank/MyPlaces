@@ -70,6 +70,8 @@ public class EditMyPlaceActivity extends ActionBarActivity implements View.OnCli
                 finishedButton.setEnabled(s.length() > 0);
             }
         });
+        Button locationButton =(Button)findViewById(R.id.editmyplace_location_button);
+        locationButton.setOnClickListener(this);
     }
 
     @Override
@@ -106,6 +108,31 @@ public class EditMyPlaceActivity extends ActionBarActivity implements View.OnCli
                 setResult(Activity.RESULT_CANCELED);
                 finish();
                 break;
+            case R.id.editmyplace_location_button:
+                Intent i = new Intent(this, MyPlacesMapActivity.class);
+                i.putExtra("state",MyPlacesMapActivity.SELECT_COORDINATES);
+                startActivityForResult(i,1);
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try{
+            if(resultCode==Activity.RESULT_OK)
+            {
+                String lon=data.getExtras().getString("lon");
+                EditText lonText=(EditText)findViewById(R.id.editmyplace_lon_edit);
+                lonText.setText(lon);
+
+                String lat=data.getExtras().getString("lon");
+                EditText latText=(EditText)findViewById(R.id.editmyplace_lon_edit);
+                lonText.setText(lat);
+            }
+        }
+        catch (Exception e)
+        {
 
         }
     }
@@ -121,7 +148,9 @@ public class EditMyPlaceActivity extends ActionBarActivity implements View.OnCli
         int id = item.getItemId();
 
         if(id == R.id.show_map_item){
-            Toast.makeText(this, "Show Map!", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent (this, MyPlacesMapActivity.class);
+            i.putExtra("state",MyPlacesMapActivity.SELECT_COORDINATES);
+            startActivity(i);
         }
         else if(id == R.id.my_places_list_item){
             Intent i = new Intent(this, MyPlacesList.class);
